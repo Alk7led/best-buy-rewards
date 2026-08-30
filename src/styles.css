@@ -142,3 +142,58 @@
     color: var(--color-foreground);
   }
 }
+
+/* ── Best Buy Rewards Club theme ───────────────────────────── */
+:root {
+  --bb-ink: oklch(0.14 0.008 280);
+  --bb-ink-2: oklch(0.19 0.012 275);
+  --bb-blue: oklch(0.48 0.21 262);
+  --bb-blue-deep: oklch(0.32 0.16 264);
+  --bb-yellow: oklch(0.9 0.18 100);
+  --bb-line: oklch(1 0 0 / 8%);
+  --bb-muted: oklch(0.78 0.01 260 / 70%);
+  --font-display: "Archivo", system-ui, sans-serif;
+  --font-body: "Mulish", system-ui, sans-serif;
+}
+
+@theme inline {
+  --color-ink: var(--bb-ink);
+  --color-ink-2: var(--bb-ink-2);
+  --color-bb-blue: var(--bb-blue);
+  --color-bb-blue-deep: var(--bb-blue-deep);
+  --color-bb-yellow: var(--bb-yellow);
+  --color-bb-line: var(--bb-line);
+  --color-bb-muted: var(--bb-muted);
+  --font-display: var(--font-display);
+  --font-body: var(--font-body);
+}
+
+body {
+  background-color: #0b0b0e;
+  color: oklch(0.98 0 0);
+  font-family: var(--font-body);
+}
+
+h1, h2, h3, .font-display { font-family: var(--font-display); }
+
+@utility no-scrollbar {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  &::-webkit-scrollbar { display: none; }
+}
+
+@keyframes bb-rise { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: none; } }
+@keyframes bb-pulse { 0%,100% { opacity: 1; transform: scale(1); } 50% { opacity: .35; transform: scale(.8); } }
+@keyframes bb-sheen { 0% { transform: translateX(-120%) skewX(-18deg); } 55%,100% { transform: translateX(240%) skewX(-18deg); } }
+
+.bb-rise { animation: bb-rise .75s cubic-bezier(.16,1,.3,1) both; }
+.bb-pulse { animation: bb-pulse 1.8s ease-in-out infinite; }
+.bb-sheen { animation: bb-sheen 5s ease-in-out infinite; }
+
+.bb-reveal { opacity: 0; transform: translateY(26px); transition: opacity .8s cubic-bezier(.16,1,.3,1), transform .8s cubic-bezier(.16,1,.3,1); }
+.bb-reveal.is-in { opacity: 1; transform: none; }
+
+@media (prefers-reduced-motion: reduce) {
+  .bb-rise, .bb-pulse, .bb-sheen { animation: none !important; }
+  .bb-reveal { opacity: 1 !important; transform: none !important; transition: none !important; }
+}
